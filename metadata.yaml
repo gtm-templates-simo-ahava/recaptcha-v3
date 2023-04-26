@@ -1,5 +1,6 @@
 homepage: "https://www.simoahava.com/"
 versions:
-  # Latest version
+  - sha: 5b5b3034ddaf21f88a2a270a1254641fdd9e670e
+    changeNotes: Add Content-Encoding header option for Google Cloud Run.
   - sha: 90f4044a0125595efad019f232cd91dafe897ea9
     changeNotes: Initial release.
