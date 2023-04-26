@@ -12,8 +12,10 @@ ___INFO___
   "type": "CLIENT",
   "id": "cvt_temp_public_id",
   "version": 1,
-  "__wm": "VGVtcGxhdGUtQXV0aG9yX3JlQ0FQVENIQXYzLVNpbW8tQWhhdmE=",
-  "categories": ["UTILITY"],
+  "__wm": "VGVtcGxhdGUtQXV0aG9yX3JlQ0FQVENIQXYzLVNpbW8tQWhhdmE\u003d",
+  "categories": [
+    "UTILITY"
+  ],
   "securityGroups": [],
   "displayName": "reCAPTCHA v3",
   "brand": {
@@ -70,6 +72,13 @@ ___TEMPLATE_PARAMETERS___
     "checkboxText": "Return the bot score in the HTTP response",
     "simpleValueType": true,
     "defaultValue": false
+  },
+  {
+    "type": "CHECKBOX",
+    "name": "setEncodingHeader",
+    "checkboxText": "Set Content-Encoding header (required for Cloud Run)",
+    "simpleValueType": true,
+    "help": "If you check this, a Content-Encoding header with the value \"gzip\" will be sent back in the response to the browser."
   },
   {
     "type": "GROUP",
@@ -174,6 +183,9 @@ const proxyResponse = (response, headers, statusCode) => {
   }
   setResponseHeader('access-control-allow-credentials', 'true');
   setResponseHeader('access-control-allow-origin', getRequestHeader('origin'));
+  if (data.setEncodingHeader) {
+    setResponseHeader('Content-Encoding', 'gzip');
+  }
   returnResponse();
 };
 
